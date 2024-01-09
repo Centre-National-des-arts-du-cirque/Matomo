@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  matomo:
+    container_name: matomo
+    image: matomo
+    environment:
+      - MATOMO_DATABASE_HOST=matomo_db
+    env_file:
+      - ./.env
+    depends_on:
+      - matomo_db
+    restart: unless-stopped
+    networks:
+      caddy:
+      matomo:
+
+  matomo_db:
+    container_name: matomo_db
+    image: mariadb
+    command: --max-allowed-packet=64MB
+    environment:
+      - MYSQL_ROOT_PASSWORD=inventa96
+    env_file:
+      - ./.env
+    restart: unless-stopped
+    networks:
+      matomo:
+
+volumes:
+  data:
+    driver: local
+  caddy_data:
+    external: true
+  caddy_config:
+
+networks:
+  matomo:
+  caddy:
+    external: true
