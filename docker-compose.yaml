@@ -29,9 +29,6 @@ services:
 volumes:
   data:
     driver: local
-  caddy_data:
-    external: true
-  caddy_config:
 
 networks:
   matomo:
