@@ -1,0 +1,8 @@
+:80 {
+    root * /var/www/html
+    reverse_proxy matomo:80
+    encode gzip
+    log stdout
+    file_server 
+    
+}
